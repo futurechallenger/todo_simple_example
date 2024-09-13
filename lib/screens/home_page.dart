@@ -13,7 +13,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final List<TodoItem> _itemList = [];
-  final _uuid = Uuid();
+  final _uuid = const Uuid();
 
   void _addItem(String title) {
     final item = TodoItem(id: _uuid.v1(), title: title, completed: false);
