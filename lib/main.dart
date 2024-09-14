@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:todo_simple_example/screens/home_page.dart';
 
 void main() {
+  debugPaintSizeEnabled = true;
   runApp(const TodoApp());
 }
 
