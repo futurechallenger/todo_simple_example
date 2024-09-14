@@ -46,9 +46,28 @@ class _HomePageState extends State<HomePage> {
   Widget _itemBuilder(BuildContext context, int index) {
     final item = _itemList[index];
 
-    return ListTile(
-      title: Text(item.title),
-    );
+    return Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+              height: 50.0,
+              color: Colors.amber,
+              child: Center(
+                  child: IconButton(
+                      onPressed: () {},
+                      icon: const Icon(Icons.radio_button_off)))),
+          Expanded(
+              flex: 1,
+              child: Container(
+                  height: 50.0,
+                  color: Colors.blue,
+                  child: Center(child: Text(item.title)))),
+          Container(
+              height: 50.0,
+              color: Colors.yellow,
+              child: const Center(child: Text('tailing'))),
+        ]);
   }
 
   void _showInput(BuildContext context) {
