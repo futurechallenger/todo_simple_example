@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_simple_example/widgets/single_choice_toggle.dart';
 import 'package:uuid/uuid.dart';
 import 'package:todo_simple_example/models/todo_item.dart';
 
@@ -29,9 +30,18 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: ListView.builder(
-        itemBuilder: _itemBuilder,
-        itemCount: _itemList.length,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const SingleChoiceToggle(),
+          Expanded(
+            child: ListView.builder(
+              itemBuilder: _itemBuilder,
+              itemCount: _itemList.length,
+            ),
+          )
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
