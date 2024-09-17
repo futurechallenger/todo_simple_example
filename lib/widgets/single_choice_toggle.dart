@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class SingleChoiceToggle extends StatefulWidget {
-  const SingleChoiceToggle({super.key});
+class SingleChoiceToggle extends StatelessWidget {
+  SingleChoiceToggle(
+      {super.key,
+      required this.selectedIndex,
+      required this.handleSegmentClick});
 
-  @override
-  State<SingleChoiceToggle> createState() => _SingleChoiceToggleState();
-}
+  final Function(int) handleSegmentClick;
 
-class _SingleChoiceToggleState extends State<SingleChoiceToggle> {
   int selectedIndex = 0;
 
   @override
@@ -19,9 +19,7 @@ class _SingleChoiceToggleState extends State<SingleChoiceToggle> {
       ],
       selected: <int>{selectedIndex},
       onSelectionChanged: (Set<int> newSelection) {
-        setState(() {
-          selectedIndex = newSelection.first;
-        });
+        handleSegmentClick(newSelection.first);
       },
     );
   }
