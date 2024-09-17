@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:todo_simple_example/widgets/single_choice_toggle.dart';
 import 'package:uuid/uuid.dart';
 import 'package:todo_simple_example/models/todo_item.dart';
@@ -14,7 +15,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int sortBy = 0;
-  final List<TodoItem> _itemList = [];
+  List<TodoItem> _itemList = [];
   final _uuid = const Uuid();
 
   void _addItem(String title) {
@@ -27,6 +28,14 @@ class _HomePageState extends State<HomePage> {
   void _setSortBy(int selectedIndex) {
     setState(() {
       sortBy = selectedIndex;
+      _itemList = _itemList
+        ..sort((el1, el2) {
+          if (sortBy == 0) {
+            return el1.createdAt > el2.createdAt ? 1 : -1;
+          } else {
+            return el1.title.compareTo(el2.title);
+          }
+        });
     });
   }
 
