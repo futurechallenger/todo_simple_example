@@ -13,6 +13,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int sortBy = 0;
   final List<TodoItem> _itemList = [];
   final _uuid = const Uuid();
 
@@ -20,6 +21,12 @@ class _HomePageState extends State<HomePage> {
     final item = TodoItem(id: _uuid.v1(), title: title, completed: false);
     setState(() {
       _itemList.add(item);
+    });
+  }
+
+  void _setSortBy(int selectedIndex) {
+    setState(() {
+      sortBy = selectedIndex;
     });
   }
 
@@ -34,7 +41,10 @@ class _HomePageState extends State<HomePage> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const SingleChoiceToggle(),
+          SingleChoiceToggle(
+            selectedIndex: sortBy,
+            handleSegmentClick: _setSortBy,
+          ),
           Expanded(
             child: ListView.separated(
               separatorBuilder: (context, index) => const Divider(),
