@@ -36,7 +36,8 @@ class _HomePageState extends State<HomePage> {
         children: [
           const SingleChoiceToggle(),
           Expanded(
-            child: ListView.builder(
+            child: ListView.separated(
+              separatorBuilder: (context, index) => const Divider(),
               itemBuilder: _itemBuilder,
               itemCount: _itemList.length,
             ),
@@ -72,7 +73,11 @@ class _HomePageState extends State<HomePage> {
               child: Container(
                   height: 50.0,
                   color: Colors.blue,
-                  child: Center(child: Text(item.title)))),
+                  child: Center(
+                      child: Text(
+                    item.title,
+                    style: const TextStyle(fontSize: 21.0),
+                  )))),
           Container(
               height: 50.0,
               color: Colors.yellow,
