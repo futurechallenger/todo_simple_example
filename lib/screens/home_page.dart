@@ -14,6 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int _selectedTabIndex = 0;
   int sortBy = 0;
   List<TodoItem> _itemList = [];
   final _uuid = const Uuid();
@@ -70,6 +71,18 @@ class _HomePageState extends State<HomePage> {
         tooltip: 'Add Todo',
         child: const Icon(Icons.add),
       ),
+      bottomNavigationBar: BottomNavigationBar(
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.settings), label: 'Settings'),
+          ],
+          currentIndex: _selectedTabIndex,
+          onTap: (int index) {
+            setState(() {
+              _selectedTabIndex = index;
+            });
+          }),
     );
   }
 
