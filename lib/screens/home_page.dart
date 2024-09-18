@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:todo_simple_example/widgets/single_choice_toggle.dart';
 import 'package:uuid/uuid.dart';
 import 'package:todo_simple_example/models/todo_item.dart';
@@ -14,7 +13,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedTabIndex = 0;
   int sortBy = 0;
   List<TodoItem> _itemList = [];
   final _uuid = const Uuid();
@@ -43,47 +41,34 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          SingleChoiceToggle(
-            selectedIndex: sortBy,
-            handleSegmentClick: _setSortBy,
-          ),
-          Expanded(
-            child: ListView.separated(
-              separatorBuilder: (context, index) => const Divider(),
-              itemBuilder: _itemBuilder,
-              itemCount: _itemList.length,
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          title: Text(widget.title),
+        ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            SingleChoiceToggle(
+              selectedIndex: sortBy,
+              handleSegmentClick: _setSortBy,
             ),
-          )
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _showInput(context);
-        },
-        tooltip: 'Add Todo',
-        child: const Icon(Icons.add),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.settings), label: 'Settings'),
+            Expanded(
+              child: ListView.separated(
+                separatorBuilder: (context, index) => const Divider(),
+                itemBuilder: _itemBuilder,
+                itemCount: _itemList.length,
+              ),
+            )
           ],
-          currentIndex: _selectedTabIndex,
-          onTap: (int index) {
-            setState(() {
-              _selectedTabIndex = index;
-            });
-          }),
-    );
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            _showInput(context);
+          },
+          tooltip: 'Add Todo',
+          child: const Icon(Icons.add),
+        ));
   }
 
   Widget _itemBuilder(BuildContext context, int index) {
