@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:todo_simple_example/screens/home_page.dart';
 import 'package:todo_simple_example/screens/settings_page.dart';
 
-const List<Widget> _pages = [
-  HomePage(
+List<Widget> _pages = [
+  const HomePage(
     title: 'Todo',
   ),
   SettingsPage(),
